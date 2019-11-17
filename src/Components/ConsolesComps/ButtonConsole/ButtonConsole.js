@@ -16,9 +16,12 @@ const buttonConsole = props => {
         purse={props.purse} 
         stand={props.stand} />
       <RightConsole 
+        plrHand={props.plrHand}
         plrHit={props.plrHit}
+        setCanSplit={props.setCanSplit}
         setStand={props.setStand}
         split={props.split}
+        stand={props.stand}
         initRound={props.initRound} />
     </div> 
   )

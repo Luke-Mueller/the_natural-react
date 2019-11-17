@@ -7,6 +7,7 @@ import Hands from './Container/Hands/Hands';
 import './App.css';
 
 const App = () => {
+  const [canSplit, setCanSplit] = useState(false);
   const [deck, setDeck] = useState(Deck);
   const [dlrHand, setDlrHand] = useState([]);
   const [leftHand, setLeftHand] = useState([]);
@@ -14,6 +15,10 @@ const App = () => {
   const [rightHand, setRightHand] = useState([]);
   const [stand, setStand] = useState(false);
   const [wastePile, setWastePile] = useState([]);
+
+  const setCanSplitHandler = () => {
+    setCanSplit(!canSplit)
+  }
 
   //  Shuffle functions
   const shuffleDeckHandler = () => {
@@ -27,7 +32,7 @@ const App = () => {
     return setDeck(shuffledDeck);
   }
 
-  // Reshuffle
+  //  Reshuffle
   if(deck.length <= 78) {
     while(wastePile.length) {
       const card = wastePile.pop();
@@ -58,7 +63,8 @@ const App = () => {
   const dlrDrawHandler = () => drawHandler(setDlrHand)
 
 
-  //  Split hand functions ~~~~~~~~
+  //  Split hand functions
+
   const splitHand = setHand => {
     const splitCard = plrHand.pop();
     return setHand([splitCard])
@@ -75,7 +81,7 @@ const App = () => {
   }
 
 
-  // WastePile functions
+  //  WastePile functions
 
   const wasteHand = hand => {
     while(hand.length) {
@@ -111,9 +117,10 @@ const App = () => {
           dlrHand={dlrHand}
           plrHand={plrHand}
           plrHit={plrDrawHandler}
+          setCanSplit={setCanSplitHandler}
+          setStand={setStandHandler}
           shuffleDeck={shuffleDeckHandler}
           split={splitHandler} 
-          setStand={setStandHandler}
           stand={stand}
           waste={wasteCards} />
       </div>

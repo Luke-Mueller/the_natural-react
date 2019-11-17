@@ -12,7 +12,6 @@ import Wager from '../../Components/ConsolesComps/Wager/Wager';
 
 const Console = props => {
 
-  const {plrHand, dlrHand} = props;
   const [bet, setBet] = useState(0);
   const [dlrTotal, setDlrTotal] = useState(0);
   const [doubled, setDoubled] = useState(false);
@@ -20,30 +19,30 @@ const Console = props => {
   const [plrTotal, setPlrTotal] = useState(0);
   const [purse, setPurse] = useState(undefined);
 
-  console.log('plrTotal: ', plrTotal);
-  console.log('dlrTotal: ', dlrTotal);
-
-  useEffect(() => {
-    let total = 0;
-    plrHand.forEach(card => {
-      total += card.value
-    })
-    setPlrTotal(total);
-  }, [plrHand]);
-
-  useEffect(() => {
-    let total = 0;
-    dlrHand.forEach(card => {
-      total += card.value
-    })
-    setDlrTotal(total);
-  }, [dlrHand]);
-  
   const addOneHandler = () => setBet(prevBet => prevBet + 1);
   const addFiveHandler = () => setBet(prevBet => prevBet + 5);
   const addTwentyFiveHandler = () => setBet(prevBet => prevBet + 25);
   const addOneHundredHandler = () => setBet(prevBet => prevBet + 100);
   const clearBetHandler = () => setBet(0);
+
+  console.log('plrTotal: ', plrTotal);
+  console.log('dlrTotal: ', dlrTotal);
+
+  useEffect(() => {
+    let total = 0;
+    props.plrHand.forEach(card => {
+      total += card.value
+    })
+    setPlrTotal(total);
+  }, [props.plrHand]);
+
+  useEffect(() => {
+    let total = 0;
+    props.dlrHand.forEach(card => {
+      total += card.value
+    })
+    setDlrTotal(total);
+  }, [props.dlrHand]);
   
   const wagerPlacedHandler = () => {
     if(bet <= purse && bet > 0) {
@@ -66,16 +65,11 @@ const Console = props => {
     if(amount > 1 && amount < 10000) {
       props.shuffleDeck();
       setPurse(amount);
-      // setModal(false);
     } else {
       console.log('error')
     }
     e.preventDefault();
   }
-
-  // const standHandler = () => {
-  //   props.stand();
-  // }
 
   const initRoundHandler = () => {
     if(plrTotal > dlrTotal) {
@@ -112,7 +106,6 @@ const Console = props => {
           addTwentyFive={addTwentyFiveHandler}
           addOneHundred={addOneHundredHandler} />
         <Purse purse={purse} />
-        
       </div>
     )
   } else if(placed <= purse) {
@@ -124,8 +117,10 @@ const Console = props => {
           doubled={doubled}
           doubleDown={doubleDownHandler}
           initRound={initRoundHandler}
+          plrHand={props.plrHand}
           plrHit={props.plrHit}
           purse={purse}
+          setCanSplit={props.setCanSplit}
           setStand={props.setStand}
           split={props.split}
           stand={props.stand} />
@@ -133,9 +128,7 @@ const Console = props => {
         <Wager bet={bet} />
       </div>
     )
-  } else if (placed > purse) {
-    setPlaced(false)
-  }
+  } 
 
   return (
     <div className={classes.MoneyConsole}>

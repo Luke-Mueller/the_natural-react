@@ -7,7 +7,7 @@ const LeftConsole = props => {
   let doubleDown,
       surrender,
       insurance;
-  if(props.purse >= props.bet * 2 && !props.doubled) { 
+  if(props.purse >= props.bet && !props.doubled && !props.stand) { 
     doubleDown = 
       <div className={classes.ButtonDiv}>
         <button className={classes.DoubleDown} onClick={props.doubleDown}/>
