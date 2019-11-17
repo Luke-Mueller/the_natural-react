@@ -1,0 +1,14 @@
+.MoneyConsole {
+  font-family: 'Jomolhari', serif;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  bottom: 70px;
+  width: 500px;
+}
+
+.MoneyConsole button {
+  height: 70px;
+  width: 70px;
+}

@@ -1,0 +1,18 @@
+.WagerConsole {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+.WagerButtons {
+  display: flex;
+  /* margin-right: 10px; */
+}
+
+h1 {
+  font-size: 4rem;
+  color: rgb(233, 216, 124);
+  margin-left: 25px;
+  width: 200px;
+}

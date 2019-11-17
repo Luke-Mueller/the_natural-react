@@ -1,0 +1,13 @@
+.Wager {
+  border: 1px solid orange;
+  display: flex;
+  position: fixed;
+  bottom: 170px;
+  left: 48vw;
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  font-size: 3rem;
+}

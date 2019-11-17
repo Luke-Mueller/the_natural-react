@@ -1,0 +1,9 @@
+.LeftHand {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  position: fixed;
+  left: 43vw;
+  bottom: 250px;
+  width: 1px;
+}

@@ -1,0 +1,48 @@
+html, body, div, h1, h2, h3, h4, h5, h6, button, li, ul, img {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  /* inherits the browser's font properties: font-size 16px */
+  font: inherit;
+  /*  specifies the vertical alignment of an inline element */
+  vertical-align: baseline;
+
+  box-sizing: border-box;
+
+  /*  specifies the height of line boxes within the element. */
+  line-height: 1;
+
+  border-radius: 0;
+
+  /* no outline around anything */
+  outline: none;
+
+  /* inherit the color value of the parent */
+  color: inherit;
+}
+
+ul, li {
+  /* no bullets in lists */
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+}
+
+input, select, progress{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+body {
+  font-family: 'PT Sans Narrow', sans-serif;
+  width: 100vw;
+  height: 100vh; 
+  background-image: url('./Assets/table/redFelt.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

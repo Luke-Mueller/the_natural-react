@@ -1,0 +1,10 @@
+.DealerHand {
+  display: flex;
+  flex-direction: row-reverse;
+  position: fixed;
+  left: 47vw;
+  top: 12vh;
+  width: 100px;
+  height: 100px;
+  z-index: 100;
+}

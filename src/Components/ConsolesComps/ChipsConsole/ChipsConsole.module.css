@@ -1,0 +1,26 @@
+.ChipsConsole {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+}
+
+.ChipsConsole button {
+  margin: 15px;
+}
+
+.White {
+  background-image: url('../../../Assets/chips/white.png');
+}
+
+.Red {
+  background-image: url('../../../Assets/chips/red.png');
+}
+
+.Blue {
+  background-image: url('../../../Assets/chips/blue.png');
+}
+
+.Black {
+  background-image: url('../../../Assets/chips/black.png');
+}

@@ -1,0 +1,10 @@
+.PlayerHand {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  position: fixed;
+  left: 50vw;
+  bottom: 250px;
+  width: 1px;
+}
+
