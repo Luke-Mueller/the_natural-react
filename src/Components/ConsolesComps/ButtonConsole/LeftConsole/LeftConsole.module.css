@@ -1,0 +1,25 @@
+.LeftConsole {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ButtonDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+}
+
+.DoubleDown {
+  background-image: url('../../../../Assets/svg/doubleDown.svg');
+}
+
+.Insurance {
+  background-image: url('../../../../Assets/svg/insurance.svg');
+}
+
+.Surrender {
+  background-image: url('../../../../Assets/svg/surrender.svg');
+}

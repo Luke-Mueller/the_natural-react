@@ -1,3 +1,5 @@
-.StartModal {
-  border: 1px solid slateblue;
+form {
+  position: relative;
+  top: 30vh;
+  background-color: rgba(41, 41, 41, 0.5);
 }

@@ -71,22 +71,20 @@ const Console = props => {
 
   const standHandler = () => {
     props.stand();
-    if(plrTotal > dlrTotal) {
-      console.log('player wins')
-    } else if(plrTotal < dlrTotal) {
-      console.log('dealer wins')
-    } else {
-      console.log('push')
-    }
   }
 
   const initRoundHandler = () => {
-    setPurse(purse + bet * 2)
+    if(plrTotal > dlrTotal) {
+      setPurse(purse + bet * 2)
+    } else if(plrTotal === dlrTotal) {
+      setPurse(purse + bet)
+    } 
     props.waste();
     setBet(0);
     setPlaced(false);
   }
 
+  let consoles;
   let startModal;
   if(purse + bet < 2 || purse === undefined) {
     startModal = 
@@ -96,8 +94,6 @@ const Console = props => {
   } else {
     startModal = null;
   }
-  
-  let consoles;
   if(!placed && purse) { 
     consoles = (
       <div>
@@ -111,27 +107,27 @@ const Console = props => {
           addTwentyFive={addTwentyFiveHandler}
           addOneHundred={addOneHundredHandler} />
         <Purse purse={purse} />
+        
       </div>
     )
   } else if(placed <= purse) {
     consoles = (
       <div>
-        <Wager bet={bet} />
-        <Purse purse={purse} />
         <ButtonConsole 
+          bet={bet}
           deal={props.deal}
           doubleDown={doubleDownHandler}
           initRound={initRoundHandler}
           plrHit={props.plrHit}
-          see={props.see}
-          shuffleDeck={props.shuffleDeck}
+          purse={purse}
           split={props.split}
           stand={standHandler}/>
+        <Purse purse={purse} />
+        <Wager bet={bet} />
       </div>
     )
   } else if (placed > purse) {
     setPlaced(false)
-    console.log('error')
   }
 
   return (

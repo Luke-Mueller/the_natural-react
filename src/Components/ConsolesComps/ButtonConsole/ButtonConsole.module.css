@@ -1,45 +1,13 @@
 .ButtonConsole {
   border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
   position: fixed;
   right: 0;
   bottom: 70px;
   display: flex;
-  flex-direction: column;
-}
-
-.ButtonDiv {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.DoubleDown {
-  background-image: url('../../../Assets/svg/doubleDown.svg');
-}
-
-.Hit {
-  background-image: url('../../../Assets/svg/hit.svg');
-}
-
-.Stand {
-  background-image: url('../../../Assets/svg/stand.svg');
-}
-
-.Split {
-  background-image: url('../../../Assets/svg/split.svg');
-}
-
-.Surrender {
-  background-image: url('../../../Assets/svg/surrender.svg');
-}
-
-.Insurance {
-  background-image: url('../../../Assets/svg/insurance.svg');
-}
-
-.Next {
-  background-image: url('../../../Assets/svg/next.svg');
+  z-index: 2;
 }
 
 button {

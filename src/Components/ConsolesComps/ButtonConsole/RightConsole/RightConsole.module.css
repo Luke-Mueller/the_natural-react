@@ -1,0 +1,29 @@
+.RightConsole {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ButtonDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+}
+
+.Next {
+  background-image: url('../../../../Assets/svg/next.svg');
+}
+
+.Hit {
+  background-image: url('../../../../Assets/svg/hit.svg');
+}
+
+.Split {
+  background-image: url('../../../../Assets/svg/split.svg');
+}
+
+.Stand {
+  background-image: url('../../../../Assets/svg/stand.svg');
+}
