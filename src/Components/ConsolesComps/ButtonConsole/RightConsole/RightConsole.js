@@ -10,7 +10,7 @@ const RightConsole = props => {
         <h4>Hit</h4>
       </div>
       <div className={classes.ButtonDiv}>
-        <button className={classes.Stand} onClick={props.stand} />
+        <button className={classes.Stand} onClick={props.setStand} />
         <h4>Stand</h4>
       </div>
       <div className={classes.ButtonDiv}>

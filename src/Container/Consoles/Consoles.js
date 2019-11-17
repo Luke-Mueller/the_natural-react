@@ -15,6 +15,7 @@ const Console = props => {
   const {plrHand, dlrHand} = props;
   const [bet, setBet] = useState(0);
   const [dlrTotal, setDlrTotal] = useState(0);
+  const [doubled, setDoubled] = useState(false);
   const [placed, setPlaced] = useState(false);
   const [plrTotal, setPlrTotal] = useState(0);
   const [purse, setPurse] = useState(undefined);
@@ -54,7 +55,10 @@ const Console = props => {
     }
   };
 
-  const doubleDownHandler = () => setBet(prevBet => prevBet * 2);
+  const doubleDownHandler = () => {
+    setBet(prevBet => prevBet * 2)
+    setDoubled(true);
+  }
 
   const submitPurseHandler = e => {
     const amount = e.target.amount.value;
@@ -69,9 +73,9 @@ const Console = props => {
     e.preventDefault();
   }
 
-  const standHandler = () => {
-    props.stand();
-  }
+  // const standHandler = () => {
+  //   props.stand();
+  // }
 
   const initRoundHandler = () => {
     if(plrTotal > dlrTotal) {
@@ -82,6 +86,7 @@ const Console = props => {
     props.waste();
     setBet(0);
     setPlaced(false);
+    setDoubled(false);
   }
 
   let consoles;
@@ -116,12 +121,14 @@ const Console = props => {
         <ButtonConsole 
           bet={bet}
           deal={props.deal}
+          doubled={doubled}
           doubleDown={doubleDownHandler}
           initRound={initRoundHandler}
           plrHit={props.plrHit}
           purse={purse}
+          setStand={props.setStand}
           split={props.split}
-          stand={standHandler}/>
+          stand={props.stand} />
         <Purse purse={purse} />
         <Wager bet={bet} />
       </div>

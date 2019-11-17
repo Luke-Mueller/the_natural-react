@@ -11,11 +11,13 @@ const buttonConsole = props => {
     <div className={classes.ButtonConsole}>
       <LeftConsole 
         bet={props.bet}
+        doubled={props.doubled}
         doubleDown={props.doubleDown} 
-        purse={props.purse} />
+        purse={props.purse} 
+        stand={props.stand} />
       <RightConsole 
         plrHit={props.plrHit}
-        stand={props.stand}
+        setStand={props.setStand}
         split={props.split}
         initRound={props.initRound} />
     </div> 

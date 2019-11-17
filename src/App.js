@@ -94,7 +94,7 @@ const App = () => {
     wasteHand(rightHand);
   }
 
-  const standHandler = () => {
+  const setStandHandler = () => {
     setStand(true)
   }
 
@@ -113,7 +113,8 @@ const App = () => {
           plrHit={plrDrawHandler}
           shuffleDeck={shuffleDeckHandler}
           split={splitHandler} 
-          stand={standHandler}
+          setStand={setStandHandler}
+          stand={stand}
           waste={wasteCards} />
       </div>
   );
