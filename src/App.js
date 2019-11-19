@@ -9,6 +9,7 @@ import './App.css';
 const App = () => {
   const [canSplit, setCanSplit] = useState(false);
   const [deck, setDeck] = useState(Deck);
+  const [didSplit, setDidSplit] = useState(false);
   const [dlrHand, setDlrHand] = useState([]);
   const [leftHand, setLeftHand] = useState([]);
   const [plrHand, setPlrHand] = useState([]);
@@ -78,6 +79,7 @@ const App = () => {
     leftSplit();
     drawHandler(setLeftHand);
     drawHandler(setRightHand)
+    setDidSplit(true)
   }
 
 
@@ -101,7 +103,7 @@ const App = () => {
   }
 
   const setStandHandler = () => {
-    setStand(true)
+    setStand(!stand)
   }
 
   return (
@@ -114,9 +116,11 @@ const App = () => {
           stand={stand} />
         <Consoles 
           deal={dealHandler}
+          didSplit={didSplit}
+          dlrDraw={dlrDrawHandler}
           dlrHand={dlrHand}
           plrHand={plrHand}
-          plrHit={plrDrawHandler}
+          plrDraw={plrDrawHandler}
           setCanSplit={setCanSplitHandler}
           setStand={setStandHandler}
           shuffleDeck={shuffleDeckHandler}

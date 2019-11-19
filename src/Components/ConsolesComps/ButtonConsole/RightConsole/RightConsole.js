@@ -18,7 +18,7 @@ const RightConsole = props => {
   if(!props.stand) {
     hit = 
       <div className={classes.ButtonDiv}>
-        <button className={classes.Hit} onClick={props.plrHit} />
+        <button className={classes.Hit} onClick={props.plrDraw} />
         <h4>Hit</h4>
       </div>
     stand =
@@ -33,9 +33,7 @@ const RightConsole = props => {
         <h4>Next Hand</h4>
       </div>
   }
-  if(props.plrHand.length === 2 && props.plrHand[0].rank === props.plrHand[1].rank) {
-    console.log(props.plrHand[0], props.plrHand[1])
-
+  if(props.plrHand.length === 2 && props.plrHand[0].rank === props.plrHand[1].rank && !props.stand) {
     split =
       <div className={classes.ButtonDiv}>
         <button className={classes.Split} onClick={props.split} />
@@ -43,7 +41,6 @@ const RightConsole = props => {
       </div>
   } else {
     split = null;
-    console.log(props.plrHand[0], props.plrHand[1])
   }
 
   return (

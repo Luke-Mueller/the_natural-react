@@ -25,9 +25,6 @@ const Console = props => {
   const addOneHundredHandler = () => setBet(prevBet => prevBet + 100);
   const clearBetHandler = () => setBet(0);
 
-  console.log('plrTotal: ', plrTotal);
-  console.log('dlrTotal: ', dlrTotal);
-
   useEffect(() => {
     let total = 0;
     props.plrHand.forEach(card => {
@@ -42,8 +39,16 @@ const Console = props => {
       total += card.value
     })
     setDlrTotal(total);
-  }, [props.dlrHand]);
-  
+    if(props.stand && total < 17) {
+      props.dlrDraw();
+    }
+  }, [props]);
+
+  console.log('PT ', plrTotal)
+  console.log('DT ', dlrTotal)
+  console.log(props.plrHand);
+  console.log(props.dlrHand)
+
   const wagerPlacedHandler = () => {
     if(bet <= purse && bet > 0) {
       setPurse(purse - bet)
@@ -79,9 +84,14 @@ const Console = props => {
     } 
     props.waste();
     setBet(0);
-    setPlaced(false);
+    setDlrTotal(0);
+    setPlrTotal(0);
     setDoubled(false);
+    setPlaced(false);
+    props.setStand();
   }
+
+  
 
   let consoles;
   let startModal;
@@ -114,11 +124,12 @@ const Console = props => {
         <ButtonConsole 
           bet={bet}
           deal={props.deal}
+          didSplit={props.didSplit}
           doubled={doubled}
           doubleDown={doubleDownHandler}
           initRound={initRoundHandler}
+          plrDraw={props.plrDraw}
           plrHand={props.plrHand}
-          plrHit={props.plrHit}
           purse={purse}
           setCanSplit={props.setCanSplit}
           setStand={props.setStand}
