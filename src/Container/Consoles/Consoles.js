@@ -13,9 +13,10 @@ import Wager from '../../Components/ConsolesComps/Wager/Wager';
 const Console = props => {
 
   const [bet, setBet] = useState(0);
+  const [busted, setBusted] = useState(false);
   const [dlrTotal, setDlrTotal] = useState(0);
   const [doubled, setDoubled] = useState(false);
-  const [placed, setPlaced] = useState(false);
+  const [betPlaced, setBetPlaced] = useState(false);
   const [plrTotal, setPlrTotal] = useState(0);
   const [purse, setPurse] = useState(undefined);
 
@@ -25,14 +26,18 @@ const Console = props => {
   const addOneHundredHandler = () => setBet(prevBet => prevBet + 100);
   const clearBetHandler = () => setBet(0);
 
+  // Calculate plr total
   useEffect(() => {
     let total = 0;
     props.plrHand.forEach(card => {
       total += card.value
     })
-    setPlrTotal(checkAceValue(total, props.plrHand))
+    let checkedTotal = checkAceValue(total, props.plrHand);
+    if(checkedTotal > 21) setBusted(true);
+    setPlrTotal(checkedTotal)
   }, [props.plrHand]);
 
+  // Calculate dlr total
   useEffect(() => {
     let total = 0;
     props.dlrHand.forEach(card => {
@@ -65,7 +70,7 @@ const Console = props => {
     if(bet <= purse && bet > 0) {
       setPurse(purse - bet)
       if(bet > 0) {
-        setPlaced(true)
+        setBetPlaced(true)
         props.deal();
       }
     }
@@ -89,21 +94,21 @@ const Console = props => {
   }
 
   const initRoundHandler = () => {
-    if(plrTotal > dlrTotal) {
+    if(dlrTotal > 21 || (plrTotal < 22 && plrTotal > dlrTotal)) {
       setPurse(purse + bet * 2)
     } else if(plrTotal === dlrTotal) {
       setPurse(purse + bet)
     } 
+    if(props.stand) props.setStand();
     props.waste();
     setBet(0);
+    setBusted(false);
     setDlrTotal(0);
     setPlrTotal(0);
     setDoubled(false);
-    setPlaced(false);
-    props.setStand();
-  }
+    setBetPlaced(false);
 
-  
+  }
 
   let consoles;
   let startModal;
@@ -115,7 +120,7 @@ const Console = props => {
   } else {
     startModal = null;
   }
-  if(!placed && purse) { 
+  if(!betPlaced && purse) { 
     consoles = (
       <div>
         <WagerConsole  
@@ -130,11 +135,12 @@ const Console = props => {
         <Purse purse={purse} />
       </div>
     )
-  } else if(placed <= purse) {
+  } else if(betPlaced) {
     consoles = (
       <div>
         <ButtonConsole 
           bet={bet}
+          busted={busted}
           deal={props.deal}
           didSplit={props.didSplit}
           doubled={doubled}

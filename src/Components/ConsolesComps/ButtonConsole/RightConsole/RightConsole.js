@@ -10,10 +10,11 @@ const RightConsole = props => {
       next;
       
   if(props.setCanSplit) { 
-    split = <div className={classes.ButtonDiv}>
-              <button className={classes.Split} onClick={props.split} />
-              <h4>Split</h4>
-            </div>
+    split = 
+      <div className={classes.ButtonDiv}>
+        <button className={classes.Split} onClick={props.split} />
+        <h4>Split</h4>
+      </div>
   }
   if(!props.stand) {
     hit = 
@@ -41,6 +42,16 @@ const RightConsole = props => {
       </div>
   } else {
     split = null;
+  }
+  if(props.busted) {
+    hit = null;
+    stand = null;
+    split = null;
+    next = 
+      <div className={classes.ButtonDiv}>
+        <button className={classes.Next} onClick={props.initRound} />
+        <h4>Next Hand</h4>
+      </div>
   }
 
   return (

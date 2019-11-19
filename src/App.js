@@ -101,7 +101,6 @@ const App = () => {
     wasteHand(plrHand);
     wasteHand(leftHand);
     wasteHand(rightHand);
-    console.log(wastePile)
   }
 
   const setStandHandler = () => {

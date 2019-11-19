@@ -26,6 +26,11 @@ const LeftConsole = props => {
         <h4>Insurance</h4>
       </div>
   }
+  if(props.busted) {
+    doubleDown = null;
+    surrender = null;
+    insurance = null;
+  }
      
   return (
     <div className={classes.LeftConsole}>
