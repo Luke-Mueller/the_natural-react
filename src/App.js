@@ -88,6 +88,7 @@ const App = () => {
   const wasteHand = hand => {
     while(hand.length) {
       const wasteCard = hand.pop();
+      if(wasteCard.rank === 'ace') wasteCard.value = 11;
       setWastePile(prevPile => [
         ...prevPile,
         wasteCard
@@ -100,6 +101,7 @@ const App = () => {
     wasteHand(plrHand);
     wasteHand(leftHand);
     wasteHand(rightHand);
+    console.log(wastePile)
   }
 
   const setStandHandler = () => {

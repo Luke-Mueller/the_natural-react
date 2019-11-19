@@ -30,7 +30,7 @@ const Console = props => {
     props.plrHand.forEach(card => {
       total += card.value
     })
-    setPlrTotal(total);
+    setPlrTotal(checkAceValue(total, props.plrHand))
   }, [props.plrHand]);
 
   useEffect(() => {
@@ -38,11 +38,23 @@ const Console = props => {
     props.dlrHand.forEach(card => {
       total += card.value
     })
-    setDlrTotal(total);
+    total = checkAceValue(total, props.dlrHand)
     if(props.stand && total < 17) {
       props.dlrDraw();
     }
+    setDlrTotal(total)
   }, [props]);
+
+  const checkAceValue = (roundTotal, hand) => {
+    while (roundTotal > 21.5 && hand.find(card => card.value === 11)) {
+      roundTotal = 0;
+      const ace = hand.find(card => card.value === 11)
+      ace.value = 1;
+      // eslint-disable-next-line 
+      hand.forEach(card => roundTotal += card.value)
+    }
+    return roundTotal;
+  }
 
   console.log('PT ', plrTotal)
   console.log('DT ', dlrTotal)
