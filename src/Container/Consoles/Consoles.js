@@ -89,7 +89,6 @@ const Console = props => {
   }
 
   const initRoundHandler = () => {
-    props.setDidSplit(false);
     setBet(0);
     setBetPlaced(false);
     setBusted(false);
@@ -139,14 +138,16 @@ const Console = props => {
           bet={bet}
           busted={busted}
           deal={props.deal}
-          didSplit={props.didSplit}
           doubled={doubled}
           doubleDown={doubleDownHandler}
           initRound={initRoundHandler}
+          leftDraw={props.leftDraw}
+          leftHand={props.leftHand}
           plrDraw={props.plrDraw}
           plrHand={props.plrHand}
           purse={purse}
-          setCanSplit={props.setCanSplit}
+          rightDraw={props.rightDraw}
+          rightHand={props.rightHand}
           setStand={props.setStand}
           split={props.split}
           stand={props.stand} />

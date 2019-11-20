@@ -7,19 +7,13 @@ import Hands from './Container/Hands/Hands';
 import './App.css';
 
 const App = () => {
-  const [canSplit, setCanSplit] = useState(false);
   const [deck, setDeck] = useState(Deck);
-  const [didSplit, setDidSplit] = useState(false);
   const [dlrHand, setDlrHand] = useState([]);
   const [leftHand, setLeftHand] = useState([]);
   const [plrHand, setPlrHand] = useState([]);
   const [rightHand, setRightHand] = useState([]);
   const [stand, setStand] = useState(false);
   const [wastePile, setWastePile] = useState([]);
-
-  const setCanSplitHandler = () => {
-    setCanSplit(!canSplit)
-  }
 
   console.log('wp ', wastePile);
   console.log('deck ', deck);
@@ -113,9 +107,6 @@ const App = () => {
   const splitHandler = () => {
     rightSplit();
     leftSplit();
-    leftDrawHandler();
-    rightDrawHandler();
-    setDidSplit(true)
   }
 
   const setStandHandler = () => {
@@ -133,14 +124,15 @@ const App = () => {
         <Consoles 
           deal={dealHandler}
           deck={deck}
-          didSplit={didSplit}
           dlrDraw={dlrDrawHandler}
           dlrHand={dlrHand}
+          leftDraw={leftDrawHandler}
+          leftHand={leftHand}
           plrHand={plrHand}
           plrDraw={plrDrawHandler}
           reShuffle={reShuffleHandler}
-          setCanSplit={setCanSplitHandler}
-          setDidSplit={setDidSplit}
+          rightDraw={rightDrawHandler}
+          rightHand={rightHand}
           setStand={setStandHandler}
           shuffleDeck={shuffleDeckHandler}
           split={splitHandler} 
