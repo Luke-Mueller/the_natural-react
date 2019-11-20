@@ -9,6 +9,7 @@ import Purse from '../../Components/ConsolesComps/Purse/Purse';
 import StartModal from '../../Components/ConsolesComps/StartModal/StartModal';
 import WagerConsole from '../../Components/ConsolesComps/WagerConsole/WagerConsole';
 import Wager from '../../Components/ConsolesComps/Wager/Wager';
+import deck from '../../Assets/deck/Deck';
 
 const Console = props => {
 
@@ -61,11 +62,6 @@ const Console = props => {
     return roundTotal;
   }
 
-  console.log('PT ', plrTotal)
-  console.log('DT ', dlrTotal)
-  console.log(props.plrHand);
-  console.log(props.dlrHand)
-
   const wagerPlacedHandler = () => {
     if(bet <= purse && bet > 0) {
       setPurse(purse - bet)
@@ -83,7 +79,6 @@ const Console = props => {
 
   const submitPurseHandler = e => {
     const amount = e.target.amount.value;
-
     if(amount > 1 && amount < 10000) {
       props.shuffleDeck();
       setPurse(amount);
@@ -94,25 +89,27 @@ const Console = props => {
   }
 
   const initRoundHandler = () => {
+    props.setDidSplit(false);
+    setBet(0);
+    setBetPlaced(false);
+    setBusted(false);
+    setDlrTotal(0);
+    setDoubled(false);
+    setPlrTotal(0);
+    if(props.stand) props.setStand();
     if(dlrTotal > 21 || (plrTotal < 22 && plrTotal > dlrTotal)) {
       setPurse(purse + bet * 2)
     } else if(plrTotal === dlrTotal) {
       setPurse(purse + bet)
     } 
-    if(props.stand) props.setStand();
-    props.waste();
-    setBet(0);
-    setBusted(false);
-    setDlrTotal(0);
-    setPlrTotal(0);
-    setDoubled(false);
-    setBetPlaced(false);
-
+    deck.length < 78 
+      ? props.reShuffle()
+      : props.waste();
   }
 
   let consoles;
   let startModal;
-  if(purse + bet < 2 || purse === undefined) {
+  if(purse + bet < 1 || purse === undefined) {
     startModal = 
       <BackDrop>
         <StartModal submit={submitPurseHandler}/>

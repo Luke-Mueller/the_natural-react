@@ -21,70 +21,10 @@ const App = () => {
     setCanSplit(!canSplit)
   }
 
-  //  Shuffle functions
-  const shuffleDeckHandler = () => {
-    let shuffledDeck = [];
-
-    while (deck.length) {
-      const randomNum = Math.floor(Math.random() * deck.length - 1);
-      const randomCard = deck.splice(randomNum, 1)[0];
-      shuffledDeck.push(randomCard);  
-    }
-    return setDeck(shuffledDeck);
-  }
-
-  //  Reshuffle
-  if(deck.length <= 78) {
-    while(wastePile.length) {
-      const card = wastePile.pop();
-      deck.push(card);
-    };
-    shuffleDeckHandler(); 
-  }
-
-
-  //  Draw cards functions
-  const dealHandler = () => {
-    setStand(false);
-    for(let i = 0; i < 4; i++) {
-      if(i === 0 || i === 2) plrDrawHandler()
-      if(i === 1 || i === 3) dlrDrawHandler()
-    }
-  }
-  
-  const drawHandler = setHand => {
-    const hitCard = deck.pop();
-    return setHand(prevHand => [
-      ...prevHand,
-      hitCard
-    ])
-  }
-
-  const plrDrawHandler = () => drawHandler(setPlrHand)
-  const dlrDrawHandler = () => drawHandler(setDlrHand)
-
-
-  //  Split hand functions
-
-  const splitHand = setHand => {
-    const splitCard = plrHand.pop();
-    return setHand([splitCard])
-  }
-
-  const rightSplit = () => splitHand(setRightHand);
-  const leftSplit = () => splitHand(setLeftHand);
-
-  const splitHandler = () => {
-    rightSplit();
-    leftSplit();
-    drawHandler(setLeftHand);
-    drawHandler(setRightHand)
-    setDidSplit(true)
-  }
-
+  console.log('wp ', wastePile);
+  console.log('deck ', deck);
 
   //  WastePile functions
-
   const wasteHand = hand => {
     while(hand.length) {
       const wasteCard = hand.pop();
@@ -103,6 +43,81 @@ const App = () => {
     wasteHand(rightHand);
   }
 
+  //  Shuffle functions
+
+  const shuffleDeckHandler = () => {
+    let shuffledDeck = [];
+
+    while (deck.length) {
+      const randomNum = Math.floor(Math.random() * deck.length - 1);
+      const randomCard = deck.splice(randomNum, 1)[0];
+      shuffledDeck.push(randomCard);  
+    }
+    return setDeck(shuffledDeck);
+  }
+
+
+  //  Reshuffle functions
+
+  // Push from hand to deck
+  const pushFromHand = (hand) => {
+    let card;
+    while(hand.length) {
+      card = hand.pop();
+      deck.push(card);
+    }
+  }
+
+  const reShuffleHandler = () => {
+    pushFromHand(dlrHand);
+    pushFromHand(leftHand);
+    pushFromHand(plrHand);
+    pushFromHand(rightHand);
+    pushFromHand(wastePile);
+    shuffleDeckHandler();
+  }
+  
+
+  //  Draw cards functions
+  const dealHandler = () => {
+    setStand(false);
+    for(let i = 0; i < 4; i++) {
+      if(i === 0 || i === 2) plrDrawHandler()
+      if(i === 1 || i === 3) dlrDrawHandler()
+    }
+  }
+  
+  const drawHandler = setHand => {
+    const hitCard = deck.pop();
+    return setHand(prevHand => [
+      ...prevHand,
+      hitCard
+    ])
+  }
+
+  const dlrDrawHandler = () => drawHandler(setDlrHand)
+  const leftDrawHandler = () => drawHandler(setLeftHand)
+  const plrDrawHandler = () => drawHandler(setPlrHand)
+  const rightDrawHandler = () => drawHandler(setRightHand)
+
+  //  Split hand functions
+
+  const splitHand = setHand => {
+    const splitCard = plrHand.pop();
+    return setHand([splitCard])
+  }
+
+  const rightSplit = () => splitHand(setRightHand);
+  const leftSplit = () => splitHand(setLeftHand);
+
+  const splitHandler = () => {
+    rightSplit();
+    leftSplit();
+    leftDrawHandler();
+    rightDrawHandler();
+    setDidSplit(true)
+  }
+
   const setStandHandler = () => {
     setStand(!stand)
   }
@@ -117,12 +132,15 @@ const App = () => {
           stand={stand} />
         <Consoles 
           deal={dealHandler}
+          deck={deck}
           didSplit={didSplit}
           dlrDraw={dlrDrawHandler}
           dlrHand={dlrHand}
           plrHand={plrHand}
           plrDraw={plrDrawHandler}
+          reShuffle={reShuffleHandler}
           setCanSplit={setCanSplitHandler}
+          setDidSplit={setDidSplit}
           setStand={setStandHandler}
           shuffleDeck={shuffleDeckHandler}
           split={splitHandler} 
