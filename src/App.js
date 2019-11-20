@@ -21,7 +21,10 @@ const App = () => {
 
   const doubleDownHandler = () => {
     setDoubled(!doubled);
-    if(!doubled) plrDrawHandler();
+    if(!doubled) {
+      plrDrawHandler();
+      setStand(true);
+    }
   }
 
   //  WastePile functions
