@@ -16,7 +16,6 @@ const Console = props => {
   const [bet, setBet] = useState(0);
   const [busted, setBusted] = useState(false);
   const [dlrTotal, setDlrTotal] = useState(0);
-  const [doubled, setDoubled] = useState(false);
   const [betPlaced, setBetPlaced] = useState(false);
   const [plrTotal, setPlrTotal] = useState(0);
   const [purse, setPurse] = useState(undefined);
@@ -62,6 +61,11 @@ const Console = props => {
     return roundTotal;
   }
 
+  const doubleDownHandler = () => {
+    setBet(bet * 2);
+    props.doubleDown()
+  }
+
   const wagerPlacedHandler = () => {
     if(bet <= purse && bet > 0) {
       setPurse(purse - bet)
@@ -71,11 +75,6 @@ const Console = props => {
       }
     }
   };
-
-  const doubleDownHandler = () => {
-    setBet(prevBet => prevBet * 2)
-    setDoubled(true);
-  }
 
   const submitPurseHandler = e => {
     const amount = e.target.amount.value;
@@ -93,8 +92,8 @@ const Console = props => {
     setBetPlaced(false);
     setBusted(false);
     setDlrTotal(0);
-    setDoubled(false);
     setPlrTotal(0);
+    if(props.doubled) props.doubleDown();
     if(props.stand) props.setStand();
     if(dlrTotal > 21 || (plrTotal < 22 && plrTotal > dlrTotal)) {
       setPurse(purse + bet * 2)
@@ -138,7 +137,7 @@ const Console = props => {
           bet={bet}
           busted={busted}
           deal={props.deal}
-          doubled={doubled}
+          doubled={props.doubled}
           doubleDown={doubleDownHandler}
           initRound={initRoundHandler}
           leftDraw={props.leftDraw}

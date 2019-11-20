@@ -7,9 +7,9 @@ import RightHand from '../../Components/HandsComps/RightHand/RightHand';
 
 const Hands = props => {
   let dlrHand,
-    leftHand,
-    plrHand,
-    rightHand;
+      leftHand,
+      plrHand,
+      rightHand;
 
   props.dlrHand.length 
     ? dlrHand = 
@@ -17,9 +17,18 @@ const Hands = props => {
         dlrHand={props.dlrHand} 
         stand={props.stand} /> 
     : dlrHand = null;
-  props.leftHand.length ? leftHand = <LeftHand leftHand={props.leftHand} /> : leftHand = null;
-  props.plrHand.length ? plrHand = <PlayerHand plrHand={props.plrHand} /> : plrHand = null;
-  props.rightHand.length ? rightHand = <RightHand rightHand={props.rightHand} /> : rightHand = null;
+  props.leftHand.length 
+    ? leftHand = <LeftHand leftHand={props.leftHand} /> 
+    : leftHand = null;
+  props.plrHand.length 
+    ? plrHand = 
+      <PlayerHand 
+        plrHand={props.plrHand}
+        doubled={props.doubled} /> 
+    : plrHand = null;
+  props.rightHand.length 
+    ? rightHand = <RightHand rightHand={props.rightHand} /> 
+    : rightHand = null;
 
   return(
     <div>

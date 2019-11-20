@@ -9,6 +9,7 @@ import './App.css';
 const App = () => {
   const [deck, setDeck] = useState(Deck);
   const [dlrHand, setDlrHand] = useState([]);
+  const [doubled, setDoubled] = useState(false);
   const [leftHand, setLeftHand] = useState([]);
   const [plrHand, setPlrHand] = useState([]);
   const [rightHand, setRightHand] = useState([]);
@@ -17,6 +18,11 @@ const App = () => {
 
   console.log('wp ', wastePile);
   console.log('deck ', deck);
+
+  const doubleDownHandler = () => {
+    setDoubled(!doubled);
+    if(!doubled) plrDrawHandler();
+  }
 
   //  WastePile functions
   const wasteHand = hand => {
@@ -117,6 +123,7 @@ const App = () => {
       <div className="App">
         <Hands
           dlrHand={dlrHand}
+          doubled={doubled}
           leftHand={leftHand}
           plrHand={plrHand}
           rightHand={rightHand}
@@ -126,6 +133,8 @@ const App = () => {
           deck={deck}
           dlrDraw={dlrDrawHandler}
           dlrHand={dlrHand}
+          doubled={doubled}
+          doubleDown={doubleDownHandler}
           leftDraw={leftDrawHandler}
           leftHand={leftHand}
           plrHand={plrHand}
