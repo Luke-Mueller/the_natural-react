@@ -4,8 +4,6 @@ import classes from './LeftConsole.module.css';
 
 const LeftConsole = props => {
 
-  console.log('props.plrhand length ', props.plrHand.length)
-
   let doubleDown,
       surrender,
       insurance;

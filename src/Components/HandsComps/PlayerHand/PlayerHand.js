@@ -11,7 +11,6 @@ const PlayerHand = props => {
     cards = props.plrHand.map(card => {
       const key = `${card.id}${card.deck}`;
       if(props.plrHand.indexOf(card) !== 2) {
-        console.log('cardindex !2: ', props.plrHand.indexOf(card))
         return (
           <Card 
             id={card.id} 
@@ -22,7 +21,6 @@ const PlayerHand = props => {
             }} />
         )
       } else if(props.plrHand.indexOf(card) === 2) {
-        console.log('cardindex = 2: ', props.plrHand.indexOf(card))
         return (
           <Card 
             id={card.id} 

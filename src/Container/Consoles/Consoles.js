@@ -136,25 +136,12 @@ const Console = props => {
     let winnings = 0;
     //  Check winner and payout
     if(leftHand.length === 0) {
-      if(plrTotal < 22 && (plrTotal > dlrTotal || dlrTotal > 21)) {
-        console.log(123)
-        winnings = bet * 2;
-      } else if(plrTotal < 22 && plrTotal === dlrTotal) {
-        console.log(456)
-        winnings = bet;
-      } else if(props.doubled) {
-        console.log(456)
-        winnings = -(0.5 * bet);
-      }  
+      if(plrTotal < 22 && (plrTotal > dlrTotal || dlrTotal > 21)) winnings = bet * 2;
+      else if(plrTotal < 22 && plrTotal === dlrTotal) winnings = bet;
+      else if(props.doubled) winnings = -(0.5 * bet); 
     } else {
-      if(leftTotal < 22 && (leftTotal > dlrTotal || dlrTotal > 21)) {
-        console.log(789)
-        winnings = bet * 2; 
-      }
-      if(rightTotal < 22 && (rightTotal > dlrTotal || dlrTotal > 21)) {
-        console.log(101112)
-        winnings += bet * 2
-      }
+      if(leftTotal < 22 && (leftTotal > dlrTotal || dlrTotal > 21)) winnings = bet * 2; 
+      if(rightTotal < 22 && (rightTotal > dlrTotal || dlrTotal > 21)) winnings += bet * 2
     }
     setPurse(prevPurse => prevPurse + winnings);
 
