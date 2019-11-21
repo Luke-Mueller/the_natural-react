@@ -24,8 +24,10 @@ const buttonConsole = props => {
         plrHand={props.plrHand}
         rightDraw={props.rightDraw}
         rightHand={props.rightHand}
+        setSplitStand={props.setSplitStand}
         setStand={props.setStand}
         split={props.split}
+        splitStand={props.splitStand}
         stand={props.stand}
         initRound={props.initRound} />
     </div> 

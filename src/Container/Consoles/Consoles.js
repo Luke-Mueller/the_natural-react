@@ -11,10 +11,6 @@ import WagerConsole from '../../Components/ConsolesComps/WagerConsole/WagerConso
 import Wager from '../../Components/ConsolesComps/Wager/Wager';
 
 const Console = props => {
-
-  console.log(props.deck)
-  console.log(props.wastePile)
-
   const {
     dlrDraw, 
     dlrHand, 
@@ -22,6 +18,7 @@ const Console = props => {
     plrHand, 
     rightHand, 
     setBusted, 
+    setStand,
     stand
   } = props;
 
@@ -34,6 +31,7 @@ const Console = props => {
   const [purse, setPurse] = useState(undefined);
   const [rightBet, setRightBet] = useState(0);
   const [rightTotal, setRightTotal] = useState(0);
+  const [splitStand, setSplitStand] = useState(false);
 
   const addOneHandler = () => setBet(prevBet => prevBet + 1);
   const addFiveHandler = () => setBet(prevBet => prevBet + 5);
@@ -41,8 +39,15 @@ const Console = props => {
   const addOneHundredHandler = () => setBet(prevBet => prevBet + 100);
   const clearBetHandler = () => setBet(0);
 
+  // Split function
+  const setSplitStandHandler = () => {
+    setSplitStand(true);
+  }
+
   //  Calculate plr total
   useEffect(() => {
+
+    // if no split / else if split
     if(plrHand.length) {
       let total = 0;
       plrHand.forEach(card => total += card.value);
@@ -57,19 +62,25 @@ const Console = props => {
         setPurse(prevPurse => prevPurse -= bet);
       }
 
-      //  Check left and right totals
       let lChecked = 0;
       let lTotal = 0;
       let rChecked = 0;
       let rTotal = 0;
+
+      //  left hand
       leftHand.forEach(card => lTotal += card.value);
       lChecked = checkAceValue(lTotal, leftHand);
+      if(lChecked > 21) setSplitStand(true);
       setLeftTotal(lChecked);
+
+      //  right hand
       rightHand.forEach(card => rTotal += card.value);
       rChecked = checkAceValue(rTotal, rightHand);
-      setRightTotal(rChecked)
+      setRightTotal(rChecked);
+      if(lChecked > 21 && rChecked > 21) setBusted(true)
+      if(lChecked < 22 && rChecked > 21) setStand(true);
     }
-  }, [bet, leftBet, leftHand, plrHand, rightBet, rightHand, setBusted]);
+  }, [bet, leftBet, leftHand, plrHand, rightBet, rightHand, setBusted, setStand]);
 
   // Calculate dlr total
   useEffect(() => {
@@ -97,7 +108,7 @@ const Console = props => {
 
   const doubleDownHandler = () => {
     setBet(bet * 2);
-    props.doubleDown()
+    props.doubleDown();
   }
 
   const wagerPlacedHandler = () => {
@@ -128,10 +139,13 @@ const Console = props => {
       if(plrTotal < 22 && (plrTotal > dlrTotal || dlrTotal > 21)) {
         console.log(123)
         winnings = bet * 2;
-      } else if(plrTotal === dlrTotal) {
+      } else if(plrTotal < 22 && plrTotal === dlrTotal) {
         console.log(456)
         winnings = bet;
-      } 
+      } else if(props.doubled) {
+        console.log(456)
+        winnings = -(0.5 * bet);
+      }  
     } else {
       if(leftTotal < 22 && (leftTotal > dlrTotal || dlrTotal > 21)) {
         console.log(789)
@@ -154,8 +168,9 @@ const Console = props => {
     setRightTotal(0);
     setLeftBet(0);
     setRightBet(0);
+    setSplitStand(false);
     if(props.doubled) props.doubleDown();
-    if(props.stand) props.setStand();
+    if(stand) setStand(false);
 
     props.waste()
     // Check reshuffle
@@ -206,8 +221,10 @@ const Console = props => {
           purse={purse}
           rightDraw={props.rightDraw}
           rightHand={props.rightHand}
+          setSplitStand={setSplitStandHandler}
           setStand={props.setStand}
           split={props.split}
+          splitStand={splitStand}
           stand={props.stand} />
         <Purse purse={purse} />
         <Wager 

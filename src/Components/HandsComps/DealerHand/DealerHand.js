@@ -6,7 +6,7 @@ import Card from '../Card/Card'
 
 const DealerHand = props => {
   let cards;
-  if(props.dlrHand.length === 2 && !props.stand) {
+  if(props.dlrHand.length === 2 && !props.stand && !props.busted) {
     // eslint-disable-next-line
     cards = props.dlrHand.map(card => {
       if(props.dlrHand.indexOf(card) === 0) {

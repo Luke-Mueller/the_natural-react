@@ -69,7 +69,6 @@ const App = () => {
 
   //  Draw cards functions
   const dealHandler = () => {
-    setStand(false);
     for(let i = 0; i < 4; i++) {
       if(i === 0 || i === 2) plrDrawHandler()
       if(i === 1 || i === 3) dlrDrawHandler()
@@ -113,11 +112,9 @@ const App = () => {
   }
 
   // Stand functions
-  const setStandHandler = () => {
-    setStand(!stand)
+  const setStandHandler = res => {
+    setStand(res)
   }
-
-
 
   return (
       <div className="App">
