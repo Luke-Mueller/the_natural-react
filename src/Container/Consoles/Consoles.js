@@ -108,6 +108,7 @@ const Console = props => {
 
   const doubleDownHandler = () => {
     setBet(bet * 2);
+    setPurse(prevPurse => prevPurse - bet);
     props.doubleDown();
   }
 
@@ -138,7 +139,7 @@ const Console = props => {
     if(leftHand.length === 0) {
       if(plrTotal < 22 && (plrTotal > dlrTotal || dlrTotal > 21)) winnings = bet * 2;
       else if(plrTotal < 22 && plrTotal === dlrTotal) winnings = bet;
-      else if(props.doubled) winnings = -(0.5 * bet); 
+      // else if(props.doubled) winnings = -(0.5 * bet); 
     } else {
       if(leftTotal < 22 && (leftTotal > dlrTotal || dlrTotal > 21)) winnings = bet * 2; 
       if(rightTotal < 22 && (rightTotal > dlrTotal || dlrTotal > 21)) winnings += bet * 2
