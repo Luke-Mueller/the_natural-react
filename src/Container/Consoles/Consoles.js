@@ -33,10 +33,10 @@ const Console = props => {
   const [rightTotal, setRightTotal] = useState(0);
   const [splitStand, setSplitStand] = useState(false);
 
-  const addOneHandler = () => setBet(prevBet => prevBet + 1);
   const addFiveHandler = () => setBet(prevBet => prevBet + 5);
   const addTwentyFiveHandler = () => setBet(prevBet => prevBet + 25);
   const addOneHundredHandler = () => setBet(prevBet => prevBet + 100);
+  const addFiveHundredHandler = () => setBet(prevBet => prevBet + 500);
   const clearBetHandler = () => setBet(0);
 
   // Split function
@@ -185,10 +185,10 @@ const Console = props => {
           clearBet={clearBetHandler} 
           wagerPlaced={wagerPlacedHandler} /> 
         <ChipsConsole 
-          addOne={addOneHandler}
           addFive={addFiveHandler}
           addTwentyFive={addTwentyFiveHandler}
-          addOneHundred={addOneHundredHandler} />
+          addOneHundred={addOneHundredHandler}
+          addFiveHundred={addFiveHundredHandler} />
         <Purse purse={purse} />
       </div>
     )

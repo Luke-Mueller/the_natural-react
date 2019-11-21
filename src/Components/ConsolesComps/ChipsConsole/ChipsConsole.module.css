@@ -9,18 +9,18 @@
   margin: 15px;
 }
 
-.White {
-  background-image: url('../../../Assets/chips/white.png');
+.Five {
+  background-image: url('../../../Assets/chips/fiveChip.jpg');
 }
 
-.Red {
-  background-image: url('../../../Assets/chips/red.png');
+.TwentyFive {
+  background-image: url('../../../Assets/chips/twentyFiveChip.jpg');
 }
 
-.Blue {
-  background-image: url('../../../Assets/chips/blue.png');
+.OneHundred {
+  background-image: url('../../../Assets/chips/oneHundredChip.jpg');
 }
 
-.Black {
-  background-image: url('../../../Assets/chips/black.png');
+.FiveHundred {
+  background-image: url('../../../Assets/chips/fiveHundredChip.jpg');
 }

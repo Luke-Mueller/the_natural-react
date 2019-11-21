@@ -5,10 +5,10 @@ import classes from './ChipsConsole.module.css'
 const ChipsConsole = props => {
   return (
     <div className={classes.ChipsConsole}>
-      <button className={classes.White} onClick={props.addOne} />
-      <button className={classes.Red} onClick={props.addFive} />
-      <button className={classes.Blue} onClick={props.addTwentyFive} />
-      <button className={classes.Black} onClick={props.addOneHundred} />
+      <button className={classes.Five} onClick={props.addFive} />
+      <button className={classes.TwentyFive} onClick={props.addTwentyFive} />
+      <button className={classes.OneHundred} onClick={props.addOneHundred} />
+      <button className={classes.FiveHundred} onClick={props.addFiveHundred} />
     </div>
   )
 }
