@@ -17,9 +17,6 @@ const App = () => {
   const [stand, setStand] = useState(false);
   const [wastePile, setWastePile] = useState([]);
 
-  console.log('wp ', wastePile);
-  console.log('deck ', deck);
-
   //  WastePile functions
   const wasteHand = hand => {
     while(hand.length) {

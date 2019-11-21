@@ -8,6 +8,26 @@
   padding: 0;
 }
 
+.WagerLeft {
+  border: 1px solid blue;
+  display: flex;
+  position: fixed;
+  bottom: 170px;
+  left: 15vw;
+  margin: 0;
+  padding: 0;
+}
+
+.WagerRight {
+  border: 1px solid red;
+  display: flex;
+  position: fixed;
+  bottom: 170px;
+  right: 15vw;
+  margin: 0;
+  padding: 0;
+}
+
 h2 {
   font-size: 3rem;
 }
