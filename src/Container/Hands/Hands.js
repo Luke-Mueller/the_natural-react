@@ -14,6 +14,7 @@ const Hands = props => {
   props.dlrHand.length 
     ? dlrHand = 
       <DealerHand 
+        busted={props.busted}
         dlrHand={props.dlrHand} 
         stand={props.stand} /> 
     : dlrHand = null;

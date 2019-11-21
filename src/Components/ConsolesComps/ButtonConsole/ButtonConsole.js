@@ -12,7 +12,8 @@ const buttonConsole = props => {
         bet={props.bet}
         busted={props.busted}
         doubled={props.doubled}
-        doubleDown={props.doubleDown} 
+        doubleDown={props.doubleDown}
+        plrHand={props.plrHand} 
         purse={props.purse} 
         stand={props.stand} />
       <RightConsole 

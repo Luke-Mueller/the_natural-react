@@ -7,6 +7,7 @@ import Hands from './Container/Hands/Hands';
 import './App.css';
 
 const App = () => {
+  const [busted, setBusted] = useState(false);
   const [deck, setDeck] = useState(Deck);
   const [dlrHand, setDlrHand] = useState([]);
   const [doubled, setDoubled] = useState(false);
@@ -18,14 +19,6 @@ const App = () => {
 
   console.log('wp ', wastePile);
   console.log('deck ', deck);
-
-  const doubleDownHandler = () => {
-    setDoubled(!doubled);
-    if(!doubled) {
-      plrDrawHandler();
-      setStand(true);
-    }
-  }
 
   //  WastePile functions
   const wasteHand = hand => {
@@ -47,7 +40,6 @@ const App = () => {
   }
 
   //  Shuffle functions
-
   const shuffleDeckHandler = () => {
     let shuffledDeck = [];
 
@@ -61,8 +53,6 @@ const App = () => {
 
 
   //  Reshuffle functions
-
-  // Push from hand to deck
   const pushFromHand = (hand) => {
     let card;
     while(hand.length) {
@@ -79,7 +69,6 @@ const App = () => {
     pushFromHand(wastePile);
     shuffleDeckHandler();
   }
-  
 
   //  Draw cards functions
   const dealHandler = () => {
@@ -103,28 +92,40 @@ const App = () => {
   const plrDrawHandler = () => drawHandler(setPlrHand)
   const rightDrawHandler = () => drawHandler(setRightHand)
 
+  //  Double Down functions
+  const doubleDownHandler = () => {
+    setDoubled(!doubled);
+    if(!doubled) {
+      plrDrawHandler();
+      setStand(true);
+    }
+  }
+
   //  Split hand functions
+  const leftSplit = () => splitHand(setLeftHand);
+  const rightSplit = () => splitHand(setRightHand);
 
   const splitHand = setHand => {
     const splitCard = plrHand.pop();
     return setHand([splitCard])
   }
 
-  const rightSplit = () => splitHand(setRightHand);
-  const leftSplit = () => splitHand(setLeftHand);
-
   const splitHandler = () => {
     rightSplit();
     leftSplit();
   }
 
+  // Stand functions
   const setStandHandler = () => {
     setStand(!stand)
   }
 
+
+
   return (
       <div className="App">
         <Hands
+          busted={busted}
           dlrHand={dlrHand}
           doubled={doubled}
           leftHand={leftHand}
@@ -132,6 +133,7 @@ const App = () => {
           rightHand={rightHand}
           stand={stand} />
         <Consoles 
+          busted={busted}
           deal={dealHandler}
           deck={deck}
           dlrDraw={dlrDrawHandler}
@@ -145,6 +147,7 @@ const App = () => {
           reShuffle={reShuffleHandler}
           rightDraw={rightDrawHandler}
           rightHand={rightHand}
+          setBusted={setBusted}
           setStand={setStandHandler}
           shuffleDeck={shuffleDeckHandler}
           split={splitHandler} 

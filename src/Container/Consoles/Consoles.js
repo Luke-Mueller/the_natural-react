@@ -13,12 +13,23 @@ import deck from '../../Assets/deck/Deck';
 
 const Console = props => {
 
+  const {
+    dlrDraw, 
+    dlrHand, 
+    leftHand, 
+    plrHand, 
+    rightHand, 
+    setBusted, 
+    stand
+  } = props;
+
   const [bet, setBet] = useState(0);
-  const [busted, setBusted] = useState(false);
-  const [dlrTotal, setDlrTotal] = useState(0);
   const [betPlaced, setBetPlaced] = useState(false);
+  const [dlrTotal, setDlrTotal] = useState(0);
+  const [leftTotal, setLeftTotal] = useState(0);
   const [plrTotal, setPlrTotal] = useState(0);
   const [purse, setPurse] = useState(undefined);
+  const [rightTotal, setRightTotal] = useState(0);
 
   const addOneHandler = () => setBet(prevBet => prevBet + 1);
   const addFiveHandler = () => setBet(prevBet => prevBet + 5);
@@ -28,27 +39,41 @@ const Console = props => {
 
   // Calculate plr total
   useEffect(() => {
-    let total = 0;
-    props.plrHand.forEach(card => {
-      total += card.value
-    })
-    let checkedTotal = checkAceValue(total, props.plrHand);
-    if(checkedTotal > 21) setBusted(true);
-    setPlrTotal(checkedTotal)
-  }, [props.plrHand]);
+    if(plrHand.length) {
+      let total = 0;
+      plrHand.forEach(card => total += card.value);
+      let checkedTotal = checkAceValue(total, plrHand);
+      if(checkedTotal > 21) setBusted(true);
+      setPlrTotal(checkedTotal);
+    } else if (leftHand.length && rightHand.length) {
+      let lChecked = 0;
+      let lTotal = 0;
+      let rChecked = 0;
+      let rTotal = 0;
+      leftHand.forEach(card => lTotal += card.value);
+      lChecked = checkAceValue(lTotal, leftHand);
+      setLeftTotal(lChecked);
+      rightHand.forEach(card => rTotal += card.value);
+      rChecked = checkAceValue(rTotal, rightHand);
+      setRightTotal(rChecked)
+    }
+  }, [leftHand, plrHand, rightHand, setBusted]);
+
+  console.log('leftTotal: ', leftTotal);
+  console.log('rightTotal: ', rightTotal);
 
   // Calculate dlr total
   useEffect(() => {
     let total = 0;
-    props.dlrHand.forEach(card => {
+    dlrHand.forEach(card => {
       total += card.value
     })
-    total = checkAceValue(total, props.dlrHand)
-    if(props.stand && total < 17) {
-      props.dlrDraw();
+    total = checkAceValue(total, dlrHand)
+    if(stand && total < 17) {
+      dlrDraw();
     }
     setDlrTotal(total)
-  }, [props]);
+  }, [dlrDraw, dlrHand, stand]);
 
   const checkAceValue = (roundTotal, hand) => {
     while (roundTotal > 21.5 && hand.find(card => card.value === 11)) {
@@ -90,7 +115,7 @@ const Console = props => {
   const initRoundHandler = () => {
     setBet(0);
     setBetPlaced(false);
-    setBusted(false);
+    props.setBusted(false);
     setDlrTotal(0);
     setPlrTotal(0);
     if(props.doubled) props.doubleDown();
@@ -135,7 +160,7 @@ const Console = props => {
       <div>
         <ButtonConsole 
           bet={bet}
-          busted={busted}
+          busted={props.busted}
           deal={props.deal}
           doubled={props.doubled}
           doubleDown={doubleDownHandler}
