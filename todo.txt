@@ -1,0 +1,8 @@
+* work out split ui
+* deal card to hand 1 after split
+* deal card to hand 2 after splitstand  
+* put chips in betting box instead of numerals
+* create a node.js backend to store the deck and shuffling functions so that users cannot access them from the frontend
+* write requests to the backend for dealing and shuffling 
+* animate card deal, setting a bet, winning a hand and losing a hand
+* create contexts to pass state instead of passing props manually
