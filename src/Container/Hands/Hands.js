@@ -1,34 +1,38 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
+import AppContext from '../../context/app-context';
 import DealerHand from '../../Components/HandsComps/DealerHand/DealerHand';
 import LeftHand from '../../Components/HandsComps/LeftHand/LeftHand';
 import PlayerHand from '../../Components/HandsComps/PlayerHand/PlayerHand';
 import RightHand from '../../Components/HandsComps/RightHand/RightHand';
 
-const Hands = props => {
+const Hands = () => {
+  
+  const global = useContext(AppContext);
+
   let dlrHand,
       leftHand,
       plrHand,
       rightHand;
 
-  props.dlrHand.length 
+  global.dlrHand.length 
     ? dlrHand = 
       <DealerHand 
-        busted={props.busted}
-        dlrHand={props.dlrHand} 
-        stand={props.stand} /> 
+        busted={global.busted}
+        dlrHand={global.dlrHand} 
+        stand={global.stand} /> 
     : dlrHand = null;
-  props.leftHand.length 
-    ? leftHand = <LeftHand leftHand={props.leftHand} /> 
+  global.leftHand.length 
+    ? leftHand = <LeftHand leftHand={global.leftHand} /> 
     : leftHand = null;
-  props.plrHand.length 
+  global.plrHand.length 
     ? plrHand = 
       <PlayerHand 
-        plrHand={props.plrHand}
-        doubled={props.doubled} /> 
+        plrHand={global.plrHand}
+        doubled={global.doubled} /> 
     : plrHand = null;
-  props.rightHand.length 
-    ? rightHand = <RightHand rightHand={props.rightHand} /> 
+  global.rightHand.length 
+    ? rightHand = <RightHand rightHand={global.rightHand} /> 
     : rightHand = null;
 
   return(

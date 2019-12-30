@@ -5,4 +5,4 @@
 * create a node.js backend to store the deck and shuffling functions so that users cannot access them from the frontend
 * write requests to the backend for dealing and shuffling 
 * animate card deal, setting a bet, winning a hand and losing a hand
-* create contexts to pass state instead of passing props manually
+* add instructional / error animations for users

@@ -13,17 +13,17 @@
 }
 
 .Next {
-  background-image: url('../../../../Assets/svg/next.svg');
+  background-image: url('../../../Assets/svg/next.svg');
 }
 
 .Draw {
-  background-image: url('../../../../Assets/svg/hit.svg');
+  background-image: url('../../../Assets/svg/hit.svg');
 }
 
 .Split {
-  background-image: url('../../../../Assets/svg/split.svg');
+  background-image: url('../../../Assets/svg/split.svg');
 }
 
 .Stand {
-  background-image: url('../../../../Assets/svg/stand.svg');
+  background-image: url('../../../Assets/svg/stand.svg');
 }

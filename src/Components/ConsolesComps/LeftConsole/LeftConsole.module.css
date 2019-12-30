@@ -13,13 +13,13 @@
 }
 
 .DoubleDown {
-  background-image: url('../../../../Assets/svg/doubleDown.svg');
+  background-image: url('../../../Assets/svg/doubleDown.svg');
 }
 
 .Insurance {
-  background-image: url('../../../../Assets/svg/insurance.svg');
+  background-image: url('../../../Assets/svg/insurance.svg');
 }
 
 .Surrender {
-  background-image: url('../../../../Assets/svg/surrender.svg');
+  background-image: url('../../../Assets/svg/surrender.svg');
 }

@@ -1,20 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import classes from './LeftConsole.module.css';
+import AppContext from '../../../context/app-context';
 
 const LeftConsole = props => {
+  const global = useContext(AppContext);
 
   let doubleDown,
       surrender,
       insurance;
-  if(props.purse >= props.bet && !props.doubled && !props.stand && props.plrHand.length === 2) { 
+
+  if (props.purse >= props.bet && !global.doubled && !global.stand && global.plrHand.length === 2) { 
     doubleDown = 
       <div className={classes.ButtonDiv}>
         <button className={classes.DoubleDown} onClick={props.doubleDown}/>
         <h4>Double Down</h4>
       </div>
   }
-  if(!props.stand && props.plrHand.length === 2) {
+  if (!global.stand && global.plrHand.length === 2) {
     surrender =  
       <div className={classes.ButtonDiv}>
         <button className={classes.Surrender} />
@@ -26,7 +29,7 @@ const LeftConsole = props => {
         <h4>Insurance</h4>
       </div>
   }
-  if(props.busted) {
+  if (global.busted) {
     doubleDown = null;
     surrender = null;
     insurance = null;

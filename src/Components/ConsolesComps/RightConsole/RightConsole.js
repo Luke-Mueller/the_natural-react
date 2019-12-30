@@ -1,45 +1,48 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import classes from './RightConsole.module.css';
+import AppContext from '../../../context/app-context';
 
 const RightConsole = props => {
+  const global = useContext(AppContext);
+
   let draw,
       stand,
       split,
       next;
   
   // Draw conditional rendering
-  if(!props.busted && !props.stand && !props.busted && props.plrHand.length) {
+  if(!global.busted && !global.stand && !global.busted && global.plrHand.length) {
     draw = 
       <div className={classes.ButtonDiv}>
-        <button className={classes.Draw} onClick={props.plrDraw} />
+        <button className={classes.Draw} onClick={global.plrDraw} />
         <h4>Hit</h4>
       </div> 
-  } else if(!props.busted && props.rightHand.length === 1 && !props.splitStand && !props.stand) {
+  } else if(!global.busted && global.rightHand.length === 1 && !props.splitStand && !global.stand) {
     draw =
       <div className={classes.ButtonDiv}>
-        <button className={classes.Draw} onClick={props.leftDraw} />
+        <button className={classes.Draw} onClick={global.leftDraw} />
         <h4>Hit</h4>
       </div> 
-  } else if(!props.busted && props.splitStand && !props.stand) {
+  } else if(!global.busted && props.splitStand && !global.stand) {
     draw =
       <div className={classes.ButtonDiv}>
-        <button className={classes.Draw} onClick={props.rightDraw} />
+        <button className={classes.Draw} onClick={global.rightDraw} />
         <h4>Hit</h4>
       </div> 
   }
   
   // Stand  conditional rendering
   if(
-    (!props.stand && !props.busted && props.plrHand.length) 
-    || (!props.busted && props.splitStand && !props.stand && props.rightHand.length > 1)
+    (!global.stand && !global.busted && global.plrHand.length) 
+    || (!global.busted && props.splitStand && !global.stand && global.rightHand.length > 1)
   ) {
     stand = 
       <div className={classes.ButtonDiv}>
-        <button className={classes.Stand} onClick={props.setStand} />
+        <button className={classes.Stand} onClick={global.setStand} />
         <h4>Stand</h4>
       </div> 
-  } else if(props.rightHand.length === 1 && props.leftHand.length > 1 && !props.splitStand) {
+  } else if(global.rightHand.length === 1 && global.leftHand.length > 1 && !props.splitStand) {
     stand = 
       <div className={classes.ButtonDiv}>
         <button className={classes.Stand} onClick={props.setSplitStand} />
@@ -48,16 +51,16 @@ const RightConsole = props => {
   }
 
   // Split conditional rendering
-  if(props.plrHand.length === 2 && props.plrHand[0].rank === props.plrHand[1].rank && !props.stand) {
+  if(global.plrHand.length === 2 && global.plrHand[0].rank === global.plrHand[1].rank && !global.stand) {
     split =
       <div className={classes.ButtonDiv}>
-        <button className={classes.Split} onClick={props.split} />
+        <button className={classes.Split} onClick={global.split} />
         <h4>Split</h4>
       </div>
   }
 
   // Next conditional rendering
-  if(props.stand || props.busted) {
+  if(global.stand || global.busted) {
     next = 
       <div className={classes.ButtonDiv}>
         <button className={classes.Next} onClick={props.initRound} />

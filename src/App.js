@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import AppContext from './context/app-context';
 import Consoles from './Container/Consoles/Consoles';
 import Deck from './Assets/deck/Deck';
 import Hands from './Container/Hands/Hands';
@@ -47,7 +48,6 @@ const App = () => {
     }
     return setDeck(shuffledDeck);
   }
-
 
   //  Reshuffle functions
   const pushFromHand = (hand) => {
@@ -118,35 +118,32 @@ const App = () => {
 
   return (
       <div className="App">
-        <Hands
-          busted={busted}
-          dlrHand={dlrHand}
-          doubled={doubled}
-          leftHand={leftHand}
-          plrHand={plrHand}
-          rightHand={rightHand}
-          stand={stand} />
-        <Consoles 
-          busted={busted}
-          deal={dealHandler}
-          deck={deck}
-          dlrDraw={dlrDrawHandler}
-          dlrHand={dlrHand}
-          doubled={doubled}
-          doubleDown={doubleDownHandler}
-          leftDraw={leftDrawHandler}
-          leftHand={leftHand}
-          plrHand={plrHand}
-          plrDraw={plrDrawHandler}
-          reShuffle={reShuffleHandler}
-          rightDraw={rightDrawHandler}
-          rightHand={rightHand}
-          setBusted={setBusted}
-          setStand={setStandHandler}
-          shuffleDeck={shuffleDeckHandler}
-          split={splitHandler} 
-          stand={stand}
-          waste={wasteCards} />
+        <AppContext.Provider 
+          value={{
+            busted: busted,
+            deal: dealHandler,
+            deck: deck,
+            dlrDraw: dlrDrawHandler,
+            dlrHand: dlrHand,
+            doubled: doubled,
+            doubleDown: doubleDownHandler,
+            leftDraw: leftDrawHandler,
+            leftHand: leftHand,
+            plrDraw: plrDrawHandler,
+            plrHand: plrHand,
+            reshuffle: reShuffleHandler,
+            rightDraw: rightDrawHandler,
+            rightHand: rightHand,
+            setBusted: setBusted,
+            setStand: setStandHandler,
+            shuffleDeck: shuffleDeckHandler,
+            split: splitHandler,
+            stand: stand,
+            waste: wasteCards
+          }}>
+          <Hands />
+          <Consoles />
+        </AppContext.Provider>
       </div>
   );
 }
