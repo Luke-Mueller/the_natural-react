@@ -109,6 +109,7 @@ const App = () => {
   const splitHandler = () => {
     rightSplit();
     leftSplit();
+    leftDrawHandler();
   }
 
   // Stand functions

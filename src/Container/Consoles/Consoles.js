@@ -37,6 +37,7 @@ const Console = () => {
   // Split function
   const setSplitStandHandler = () => {
     setSplitStand(true);
+    global.rightDraw();
   }
 
   //  Calculate plr total
