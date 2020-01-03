@@ -28,10 +28,18 @@ const Console = () => {
   const [rightTotal, setRightTotal] = useState(0);
   const [splitStand, setSplitStand] = useState(false);
 
-  const addFiveHandler = () => setBet(prevBet => prevBet + 5);
-  const addTwentyFiveHandler = () => setBet(prevBet => prevBet + 25);
-  const addOneHundredHandler = () => setBet(prevBet => prevBet + 100);
-  const addFiveHundredHandler = () => setBet(prevBet => prevBet + 500);
+  const addFiveHandler = () => {
+    if (bet + 5 <= purse) setBet(prevBet => prevBet + 5);
+  }
+  const addTwentyFiveHandler = () => {
+    if (bet + 25 <= purse) setBet(prevBet => prevBet + 25);
+  }
+  const addOneHundredHandler = () => {
+    if (bet + 100 <= purse) setBet(prevBet => prevBet + 100);
+  }
+  const addFiveHundredHandler = () => {
+    if (bet + 500 <= purse) setBet(prevBet => prevBet + 500);
+  }
   const clearBetHandler = () => setBet(0);
 
   // Split function
